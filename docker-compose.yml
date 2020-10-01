@@ -1,0 +1,45 @@
+version: "3"
+services:
+  geartable:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD: 'local'
+    image: geartable:1.0
+    ports:
+      - 8080:80
+    volumes:
+      - .:/var/www/html
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    environment:
+      DEBUG: 'true'
+      SECURITY_SALT: 49e558df8e733a6daedbe054a9ccd7add9d9a6efa8a96cf3248815c364b47391
+      DATABASE_URL: mysql://devuser:devpass@131.31.1.2/geartable
+    networks:
+      gear_net:
+        ipv4_address: 131.31.1.1
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: geartable
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
+    ports:
+      - 9906:3306
+    networks:
+      gear_net:
+        ipv4_address: 131.31.1.2
+volumes:
+  db_data: {}
+networks:
+  gear_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 131.31.0.0/16
