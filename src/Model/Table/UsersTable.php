@@ -44,6 +44,13 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Apis', [
+            'foreignKey' => 'user_id',
+        ]);
+        $this->hasMany('Sheets', [
+            'foreignKey' => 'user_id',
+        ]);
     }
 
     /**
