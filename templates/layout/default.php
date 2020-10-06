@@ -38,7 +38,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Gear</span>Table</a>
+            <a href="<?= $this->Url->build('/') ?>">
+                <img src="/webroot/img/geartable-logo-100x100.png" alt="GearTable" />
+                <br />
+                <span>Gear</span>Table
+            </a>
         </div>
         <div class="top-nav-links">
             <?php
