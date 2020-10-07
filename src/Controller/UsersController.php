@@ -16,7 +16,7 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
 
-        $this->Authentication->allowUnauthenticated(['login']);
+        $this->Authentication->allowUnauthenticated(['login', 'callback']);
     }
 
     public function login()
@@ -25,7 +25,8 @@ class UsersController extends AppController
         // If the user is logged in send them away.
         if ($result->isValid()) {
             $target = $this->Authentication->getLoginRedirect() ?? '/home';
-            return $this->redirect($target);
+            $this->redirect($target);
+            exit();
         }
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error('Invalid username or password');
@@ -39,11 +40,10 @@ class UsersController extends AppController
     }
 
     public function callback() {
-        $email = json_decode((new GithubController())->callback());
+        $email = (new GithubController())->emailCallback($this->request->getQueryParams());
         if(is_null($email)) {
             $this->error('Error from GitHub', 404);
         }
-        pr($email);
         dd($email);
     }
 }
