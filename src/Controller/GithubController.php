@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use Aws\DynamoDb\Exception\DynamoDbException;
 use Cake\Http\Client;
-use Cake\Routing\Router;
 
 /**
  * Github Controller
@@ -31,11 +30,13 @@ class GithubController extends AppController
     public function initialize(): void
     {
         parent::initialize();
+        $this->Authentication->allowUnauthenticated(['initialize', 'oauth', 'callback']);
+
         $this->setCurlGithubHeaders('User-Agent: jdecode');
         $this->http = new Client();
     }
 
-    public function getGithubUrl()
+    private function getGithubUrl()
     {
         return 'https://github.com/login/oauth/authorize?'
             . 'client_id=' . env('OAUTHAPP_GITHUB_CLIENT_ID')
@@ -52,9 +53,9 @@ class GithubController extends AppController
         return implode(' ', $scopes);
     }
 
-    public function callback()
+    public function emailCallback($params)
     {
-        $github_return = $this->request->getQueryParams();
+        $github_return = $params;
         if (isset($github_return['code']) && strlen(trim($github_return['code']))) {
             $postvars = [
                 'code' => $github_return['code'],
@@ -173,7 +174,7 @@ class GithubController extends AppController
                 'KeyConditionExpression' => "pk = :pk",
                 'ExpressionAttributeValues' => [
                     ':pk' => [
-                        'S' => $profile['email']
+                        'S' => $profile['pk']
                     ]
                 ],
                 'Limit' => 1
