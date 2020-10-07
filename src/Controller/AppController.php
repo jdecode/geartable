@@ -21,6 +21,7 @@ use Aws\DynamoDb\Marshaler;
 use Aws\Sdk;
 use Cake\Controller\Controller;
 use Cake\Http\Exception\NotFoundException;
+use Cake\Http\Session;
 use PDA\PDA;
 
 /**
@@ -36,6 +37,7 @@ class AppController extends Controller
     public PDA $pda;
     public DynamoDbClient $dynamoDb;
     public Marshaler $marshaler;
+    public Session $session;
     /**
      * Initialization hook method.
      *
@@ -65,6 +67,7 @@ class AppController extends Controller
                                    ]))->createDynamoDb();
         $this->pda = new PDA($this->dynamoDb);
         $this->marshaler = new Marshaler();
+        $this->session = new Session();
     }
 
     public function error($message = '', $code = 404)
