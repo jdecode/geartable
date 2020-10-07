@@ -153,6 +153,9 @@ class GithubController extends AppController
     private function getEmail($access_token)
     {
         $user = json_decode($this->userInfo($access_token), true);
+        if(empty($user['email'])) {
+            $this->error('Error from GitHub', 404);
+        }
         $profile = [
             'pk' => 'USER#'.$user['email'],
             'sk' => '#PROFILE#'.$user['email'],
