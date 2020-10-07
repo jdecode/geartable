@@ -1,13 +1,9 @@
-<div class="users form content">
-    <?= $this->Form->create() ?>
-    <fieldset>
-        <legend><?= __('Please enter your email and password') ?></legend>
-        <?= $this->Form->control('email') ?>
-        <?= $this->Form->control('password') ?>
-    </fieldset>
-    <?= $this->Form->button(__('Login')); ?>
-    <?= $this->Form->end() ?>
-    <div class="text-center">
-        <a href="/github/oauth">Login with GitHub</a>
+<div class="users form content" style="min-height: 100px;">
+    <div class="text-center" style="border: 1px dashed gray; float: left; padding: 2px 15px;">
+        <a href="/github/oauth">
+            <img src="/webroot/img/GitHub-Mark-32px.png" alt="GitHub" />
+            <br />
+            Login with GitHub
+        </a>
     </div>
 </div>
