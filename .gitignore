@@ -1,3 +1,5 @@
+
+docker-compose.yml
 # CakePHP specific files #
 ##########################
 /config/app_local.php
