@@ -37,4 +37,13 @@ class UsersController extends AppController
         $this->Authentication->logout();
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
+
+    public function callback() {
+        $email = json_decode((new GithubController())->callback());
+        if(is_null($email)) {
+            $this->error('Error from GitHub', 404);
+        }
+        pr($email);
+        dd($email);
+    }
 }
