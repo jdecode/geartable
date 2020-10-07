@@ -12,7 +12,9 @@
         "cakephp/plugin-installer": "^1.2",
         "firebase/php-jwt": "^5.2",
         "konnector-dev/pda": "^0.3.0",
-        "mobiledetect/mobiledetectlib": "^2.8"
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "cakephp/bake": "^2.0.3",
