@@ -4,6 +4,7 @@ RUN composer create-project -n --prefer-dist cakephp/app ./
 
 COPY composer.json .
 RUN composer install -n --prefer-dist
+RUN composer update -n
 
 COPY . .
 
