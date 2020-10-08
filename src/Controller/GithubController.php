@@ -53,7 +53,7 @@ class GithubController extends AppController
         return implode(' ', $scopes);
     }
 
-    public function emailCallback($params)
+    public function userCallback($params)
     {
         $github_return = $params;
         if (isset($github_return['code']) && strlen(trim($github_return['code']))) {
@@ -66,7 +66,7 @@ class GithubController extends AppController
             ];
             $this->curlGithubUrl = 'https://github.com/login/oauth/access_token';
             $this->setCurlGithubPost($postvars);
-            return $this->getEmail($this->getAccessTokenFromParams($this->curlGithub()));
+            return $this->getUser($this->getAccessTokenFromParams($this->curlGithub()));
         }
         return null;
     }
@@ -150,7 +150,7 @@ class GithubController extends AppController
         return $info;
     }
 
-    private function getEmail($access_token)
+    private function getUser($access_token)
     {
         $user = json_decode($this->userInfo($access_token), true);
         if(empty($user['email'])) {
@@ -186,7 +186,10 @@ class GithubController extends AppController
             if (!$resp['Count']) {
                 $this->pda->insert('geartable', array_keys($profile), [array_values($profile)]);
             }
-            return $user['email'];
+            return [
+                'email' => $user['email'],
+                'name' => $user['name']
+            ];
         } catch (DynamoDbException $DynamoDbException) {
             dd($DynamoDbException);
         }
