@@ -45,9 +45,17 @@ class UsersController extends AppController
     }
 
     public function callback() {
-        $email = (new GithubController())->emailCallback($this->request->getQueryParams());
-
-        $this->session->write(['Auth' => ['email' => $email, 'name' => $email]]);
+        $user = (new GithubController())->userCallback($this->request->getQueryParams());
+        $this->rdbmsAdd($user);
+        $this->session->write(['Auth' => ['email' => $user['email'], 'name' => $user['name']]]);
         return $this->redirect('/sheets');
+    }
+
+    private function rdbmsAdd($userInfo): void
+    {
+        $this->Users->findOrCreate(['email' => $userInfo['email']],
+            function ($entity) use ($userInfo) {
+                $entity->name = $userInfo['name'];
+        });
     }
 }
