@@ -1,9 +1,14 @@
 FROM jdecode/php7.4:2
 
+RUN composer create-project -n --prefer-dist cakephp/app ./
+
 COPY composer.json .
 RUN composer install -n --prefer-dist
 
 COPY . .
+
+#RUN apt-get install gosu
+RUN usermod -o -u 1000 www-data && groupmod -o -g 1000 www-data
 
 ARG BUILD
 ENV BUILD=${BUILD}
