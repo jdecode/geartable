@@ -5,6 +5,8 @@ RUN composer install -n --prefer-dist
 
 COPY . .
 
+RUN chmod -R 0777 tmp logs
+
 ARG BUILD
 ENV BUILD=${BUILD}
 
