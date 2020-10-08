@@ -5,6 +5,7 @@ RUN composer install -n --prefer-dist
 
 COPY . .
 
+RUN mkdir tmp logs
 RUN chmod -R 0777 tmp logs
 
 ARG BUILD
