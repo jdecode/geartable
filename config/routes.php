@@ -58,6 +58,9 @@ $routes->scope('/', function (RouteBuilder $builder) {
      */
     $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
+    $builder->connect('/api/{hash}', ['controller' => 'Apis', 'action' => 'execute'])
+    ->setPass(['hash']);
+
     /*
      * Connect catchall routes for all controllers.
      *
