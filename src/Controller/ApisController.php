@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+use Google_Client;
+use Google_Service_Sheets;
+
 /**
  * Apis Controller
  *
@@ -11,6 +15,12 @@ namespace App\Controller;
  */
 class ApisController extends AppController
 {
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->allowUnauthenticated(['execute']);
+    }
     /**
      * Index method
      *
@@ -108,5 +118,30 @@ class ApisController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function execute($hash) {
+        $api = $this->Apis->find('all', [
+            'conditions' => [
+                'Apis.hash' => $hash,
+                'Apis.active' => true
+            ],
+            'contain' => ['Sheets'],
+            'limit' => 1
+        ])->all();
+        $api = $api->first();
+        $this->response->getBody()->write(
+            json_encode(
+                (new Google_Service_Sheets(
+                    new Google_Client([
+                                          'scopes' => [Google_Service_Sheets::SPREADSHEETS_READONLY],
+                                          'use_application_default_credentials' => true
+                                      ])))
+                    ->spreadsheets_values
+                    ->get($api->sheet->id_sheet, $api->api_range)
+                    ->getValues()
+            )
+        );
+        return $this->response;
     }
 }
