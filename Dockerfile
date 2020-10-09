@@ -1,4 +1,4 @@
-FROM jdecode/php7.4:2
+FROM jdecode/php7.4:3
 
 RUN composer create-project -n --prefer-dist cakephp/app ./
 
