@@ -17,6 +17,8 @@ use Cake\Event\EventInterface;
 class UsersController extends AppController
 {
 
+    private User $_user;
+
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -47,13 +49,20 @@ class UsersController extends AppController
     public function callback() {
         $user = (new GithubController())->userCallback($this->request->getQueryParams());
         $this->rdbmsAdd($user);
-        $this->session->write(['Auth' => ['email' => $user['email'], 'name' => $user['name']]]);
+        $this->session->write(
+            [
+                'Auth' => [
+                    'id' => $this->_user['id'],
+                    'email' => $user['email'],
+                    'name' => $user['name']
+                ]
+            ]);
         return $this->redirect('/sheets');
     }
 
     private function rdbmsAdd($userInfo): void
     {
-        $this->Users->findOrCreate(['email' => $userInfo['email']],
+        $this->_user = $this->Users->findOrCreate(['email' => $userInfo['email']],
             function ($entity) use ($userInfo) {
                 $entity->name = $userInfo['name'];
         });
