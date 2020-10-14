@@ -49,12 +49,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             if ($this->Identity->isLoggedIn()) {
                 echo $this->Html->link(
                     'Logout',
-                    '/users/logout'
+                    '/logout'
                 );
             } else {
                 echo $this->Html->link(
                     'Login',
-                    '/users/login'
+                    '/login'
                 );
             }
             ?>
