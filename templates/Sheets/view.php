@@ -36,11 +36,14 @@
                         <?php foreach ($sheet->apis as $apis) : ?>
                         <tr>
                             <td><?= h($apis->name) ?></td>
-                            <td><?= h($apis->hash) ?></td>
+                            <td>
+                                <?= $this->Html->link(__('Open'), '/api/'.h($apis->hash), [
+                                    'class' => 'button',
+                                    'target' => '_blank'
+                                ]) ?>
+                            </td>
                             <td><?= h($apis->api_range) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Apis', 'action' => 'view', $apis->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Apis', 'action' => 'edit', $apis->id]) ?>
                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Apis', 'action' => 'delete', $apis->id], ['confirm' => __('Are you sure you want to delete # {0}?', $apis->id)]) ?>
                             </td>
                         </tr>
