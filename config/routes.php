@@ -50,7 +50,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, templates/Pages/home.php)...
      */
-    $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $builder->connect('/', ['controller' => 'Sheets', 'action' => 'index']);
     $builder->connect('/home', ['controller' => 'Sheets', 'action' => 'index']);
     $builder->connect('/login', ['controller' => 'Users', 'action' => 'login']);
     $builder->connect('/logout', ['controller' => 'Users', 'action' => 'logout']);
@@ -63,6 +63,9 @@ $routes->scope('/', function (RouteBuilder $builder) {
 
     $builder->connect('/api/{hash}', ['controller' => 'Apis', 'action' => 'execute'])
     ->setPass(['hash']);
+
+    $builder->connect('/apis/add/{sheet_id}', ['controller' => 'Apis', 'action' => 'add'])
+    ->setPass(['sheet_id']);
 
     /*
      * Connect catchall routes for all controllers.

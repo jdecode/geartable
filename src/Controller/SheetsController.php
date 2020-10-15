@@ -18,12 +18,10 @@ use Cake\Http\Response;
  */
 class SheetsController extends AppController
 {
-    private int $id_user;
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
         $this->Authentication->allowUnauthenticated([]);
-        $this->id_user = $this->request->getAttribute('identity')->get('id');
     }
     /**
      * Index method
@@ -76,6 +74,8 @@ class SheetsController extends AppController
         $sheet = $this->Sheets->newEmptyEntity();
         if ($this->request->is('post')) {
             $sheet = $this->Sheets->patchEntity($sheet, $this->request->getData());
+            $sheet->user_id = $this->id_user;
+            $sheet->active = 1;
             if ($this->Sheets->save($sheet)) {
                 $this->Flash->success(__('The sheet has been saved.'));
 
