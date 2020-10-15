@@ -22,13 +22,14 @@
             <fieldset>
                 <legend><?= __('Edit Sheet') ?></legend>
                 <?php
-                    echo $this->Form->control('id_sheet');
-                    echo $this->Form->control('active');
-                    echo $this->Form->control('user_id', ['options' => $users]);
+                    echo $this->Form->control('id_sheet', ['label' => 'Sheet ID']);
                     echo $this->Form->control('name');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Html->link(__('Back'), '/sheets/view/'.$sheet->id, [
+                'class' => 'button button-outline'
+            ]) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

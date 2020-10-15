@@ -18,10 +18,12 @@
         <div class="sheets view content">
             <h3><?= h($sheet->name) ?></h3>
             <i>
-                <?= $this->Html->link( '[Open in new tab]', 'https://docs.google.com/spreadsheets/d/'.$sheet->id_sheet, ['target' => '_blank']) ?>
+                <?= $this->Html->link( '[Open sheet in new tab]', 'https://docs.google.com/spreadsheets/d/'.$sheet->id_sheet, ['target' => '_blank']) ?>
             </i>
-            <?php if (!empty($sheet->apis)) : ?>
             <div class="related">
+                <?= $this->Html->link(__('New API'), ['controller' => 'Apis', 'action' => 'add', $sheet->id], ['class' => 'button float-right']) ?>
+                <br />
+                <?php if (!empty($sheet->apis)) : ?>
                 <h4><?= __('APIs') ?></h4>
                 <div class="table-responsive">
                     <table>
@@ -45,8 +47,8 @@
                         <?php endforeach; ?>
                     </table>
                 </div>
+                <?php endif; ?>
             </div>
-            <?php endif; ?>
         </div>
     </div>
 </div>
