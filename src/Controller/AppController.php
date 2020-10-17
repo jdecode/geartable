@@ -38,7 +38,7 @@ class AppController extends Controller
     public DynamoDbClient $dynamoDb;
     public Marshaler $marshaler;
     public Session $session;
-    protected int $id_user;
+    protected null|int $id_user;
     /**
      * Initialization hook method.
      *
@@ -69,10 +69,7 @@ class AppController extends Controller
         $this->pda = new PDA($this->dynamoDb);
         $this->marshaler = new Marshaler();
         $this->session = new Session();
-        $_identifier = $this->request->getAttribute('identity');
-        if(!is_null($_identifier)) {
-            $this->id_user = $_identifier->get('id');
-        }
+        $this->id_user = $this->request->getAttribute('identity')?->get('id');
     }
 
     public function error($message = '', $code = 404)
