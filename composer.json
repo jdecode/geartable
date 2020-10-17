@@ -15,7 +15,8 @@
         "firebase/php-jwt": "^5.2",
         "google/apiclient": "^2.7",
         "konnector-dev/pda": "^0.3.0",
-        "mobiledetect/mobiledetectlib": "^2.8"
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "phpunit/phpunit": "9.*"
     },
     "require-dev": {
         "cakephp/bake": "^2.0.3",
