@@ -5,11 +5,11 @@
     "type": "project",
     "license": "MIT",
     "require": {
-        "php": ">=7.4",
+        "php": "^8",
         "ext-curl": "*",
         "ext-json": "*",
         "cakephp/authentication": "^2.3",
-        "cakephp/cakephp": "~4.1.0",
+        "cakephp/cakephp": "4.*",
         "cakephp/migrations": "^3.0",
         "cakephp/plugin-installer": "^1.2",
         "firebase/php-jwt": "^5.2",
@@ -22,7 +22,6 @@
         "cakephp/cakephp-codesniffer": "~4.2.0",
         "cakephp/debug_kit": "^4.1",
         "josegonzalez/dotenv": "^3.2",
-        "phpunit/phpunit": "~8.5.0",
         "psy/psysh": "@stable"
     },
     "suggest": {
