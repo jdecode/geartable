@@ -2,7 +2,7 @@ FROM jdecode/php8.0rc2:1
 
 RUN composer create-project -n --prefer-dist cakephp/app ./ --ignore-platform-reqs
 
-COPY composer.* .
+COPY composer.* ./
 
 RUN composer install -n --prefer-dist --ignore-platform-reqs 
 #RUN composer update -n --ignore-platfrom-reqs
