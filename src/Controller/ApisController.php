@@ -100,16 +100,18 @@ class ApisController extends AppController
             'limit' => 1
         ])->all();
         $api = $api->first();
+        $sheet_data = (new Google_Service_Sheets(
+            new Google_Client([
+                                  'scopes' => [Google_Service_Sheets::SPREADSHEETS_READONLY],
+                                  'use_application_default_credentials' => true
+                              ])))
+            ->spreadsheets_values
+            ->get($api->sheet->id_sheet, $api->api_range)
+            ->getValues();
+
         $this->response->getBody()->write(
             json_encode(
-                (new Google_Service_Sheets(
-                    new Google_Client([
-                                          'scopes' => [Google_Service_Sheets::SPREADSHEETS_READONLY],
-                                          'use_application_default_credentials' => true
-                                      ])))
-                    ->spreadsheets_values
-                    ->get($api->sheet->id_sheet, $api->api_range)
-                    ->getValues()
+                ['data' => $sheet_data], JSON_FORCE_OBJECT
             )
         );
         return $this->response;
