@@ -37,6 +37,7 @@ class Api extends Entity
         'hash' => true,
         'sheet_id' => true,
         'active' => true,
+        'header' => true,
         'api_range' => true,
         'user_id' => true,
         'created' => true,

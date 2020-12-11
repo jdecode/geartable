@@ -31,6 +31,7 @@
                             <th><?= __('Name') ?></th>
                             <th><?= __('Hash') ?></th>
                             <th><?= __('Api Range') ?></th>
+                            <th><?= __('Headers') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($sheet->apis as $apis) : ?>
@@ -43,6 +44,7 @@
                                 ]) ?>
                             </td>
                             <td><?= h($apis->api_range) ?></td>
+                            <td><?= $apis->header ? "Yes" : "No" ?></td>
                             <td class="actions">
                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Apis', 'action' => 'delete', $apis->id], ['confirm' => __('Are you sure you want to delete # {0}?', $apis->id)]) ?>
                             </td>

@@ -86,6 +86,10 @@ class ApisTable extends Table
             ->allowEmptyString('active');
 
         $validator
+            ->boolean('header')
+            ->allowEmptyString('header');
+
+        $validator
             ->scalar('api_range')
             ->maxLength('api_range', 255)
             ->requirePresence('api_range', 'create')

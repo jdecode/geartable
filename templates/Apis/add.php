@@ -23,6 +23,10 @@
                     echo $this->Form->control('api_range', [
                         'label' => 'Range'
                     ]);
+                    echo $this->Form->control('header', [
+                        'type' => 'checkbox',
+                        'label' => 'Has headers (first row will become header, otherwise associative/numeric indices of columns in an array)'
+                    ]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
