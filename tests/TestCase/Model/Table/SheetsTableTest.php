@@ -19,17 +19,6 @@ class SheetsTableTest extends TestCase
     protected $Sheets;
 
     /**
-     * Fixtures
-     *
-     * @var array
-     */
-    protected $fixtures = [
-        'app.Sheets',
-        'app.Users',
-        'app.Apis',
-    ];
-
-    /**
      * setUp method
      *
      * @return void

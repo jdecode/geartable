@@ -17,17 +17,6 @@ class SheetsControllerTest extends TestCase
     use IntegrationTestTrait;
 
     /**
-     * Fixtures
-     *
-     * @var array
-     */
-    protected $fixtures = [
-        'app.Sheets',
-        'app.Users',
-        'app.Apis',
-    ];
-
-    /**
      * Test index method
      *
      * @return void

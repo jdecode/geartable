@@ -17,15 +17,6 @@ class UsersControllerTest extends TestCase
     use IntegrationTestTrait;
 
     /**
-     * Fixtures
-     *
-     * @var array
-     */
-    protected $fixtures = [
-        'app.Users',
-    ];
-
-    /**
      * Test index method
      *
      * @return void

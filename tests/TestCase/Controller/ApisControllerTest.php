@@ -21,11 +21,7 @@ class ApisControllerTest extends TestCase
      *
      * @var array
      */
-    protected $fixtures = [
-        'app.Apis',
-        'app.Sheets',
-        'app.Users',
-    ];
+
 
     /**
      * Test index method
