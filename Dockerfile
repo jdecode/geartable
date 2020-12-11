@@ -1,4 +1,5 @@
-FROM jdecode/php8.0rc2:1
+FROM jdecode/p8-my-pg-nodejs:1
+#FROM jdecode/php8.0rc2:1
 
 RUN composer create-project -n --prefer-dist cakephp/app ./ --ignore-platform-reqs
 
